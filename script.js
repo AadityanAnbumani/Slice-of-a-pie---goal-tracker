@@ -210,7 +210,7 @@ function displayGoal(goal) {
 
             <div class="time-section">
                 <p>Time Remaining</p>
-                <strong>5 days</strong>
+                <strong>${getDaysRemaining(goal)}</strong>
             </div>
 
         </div>
@@ -349,3 +349,23 @@ floatingLogos.forEach(function (logo) {
 
     moveLogo();
 });
+
+function getDaysRemaining(goal) {
+    const today = new Date();
+    const completionDate = new Date(goal.completionDate);
+    today.setHours(0, 0, 0, 0);
+    completionDate.setHours(0, 0, 0, 0);
+
+    const difference = completionDate - today;
+    const daysRemaining = Math.ceil(difference / (1000 * 60 * 60 * 24));
+    if (daysRemaining < 0) {
+        return "Overdue";
+    }
+    if (daysRemaining === 0) {
+        return "Due today";
+    }
+    if (daysRemaining === 1) {
+        return "1 day";
+    }
+    return `${daysRemaining} days`;
+}
