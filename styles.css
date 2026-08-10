@@ -306,3 +306,17 @@ label {
     padding: 25px;
     overflow-y: auto;
 }
+
+#floating-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-logo {
+    position: absolute;
+    width: 80px;
+    opacity: 0.12;
+}

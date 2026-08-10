@@ -319,3 +319,33 @@ function generateMilestones(completionDate) {
     }
     return milestones;
 }
+
+const floatingLogos = document.querySelectorAll(".floating-logo");
+
+floatingLogos.forEach(function (logo) {
+    const size = 50 + Math.random() * 70;
+    logo.style.width = size + "px";
+
+    let x = Math.random() * (window.innerWidth - logo.offsetWidth);
+    let y = Math.random() * (window.innerHeight - logo.offsetHeight);
+    let speedX = (Math.random() - 0.5) * 0.6;
+    let speedY = (Math.random() - 0.5) * 0.6;
+
+    function moveLogo() {
+        x += speedX;
+        y += speedY;
+        if (x + size >= window.innerWidth || x <= 0) {
+            speedX = -speedX;
+        }
+        if (y + size >= window.innerHeight || y <= 0) {
+            speedY = -speedY;
+        }
+
+        logo.style.left = x + "px";
+        logo.style.top = y + "px";
+
+        requestAnimationFrame(moveLogo);
+    }
+
+    moveLogo();
+});
