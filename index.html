@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Yuyu&display=swap" rel="stylesheet">
+    <link rel="icon" type=""image/x-icon" href="pie.png">
+</head>
+<body>
+    <div class="main">
+        <img src="pie.png" alt="Slic of a pie logo" class="top-left-logo" width="100">
+        <h1>Slice of a pie - goal tracker</h1>
+        <div class="goal-clusters">
+            <div class="short-term">
+                <h3>Short term goals:</h3>
+                <div class="notes" id="short-goals">
+                    <div class="goal-list" id="short-goal-list">
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        <p>placeholder</p>
+                        
+                    </div>
+                    <button class="addBtn" onclick="overlayOpen('overlay-short')">+ add goal</button>
+                </div>
+            </div>
+            <div class="medium-term">
+                <h3>Medium term goals:</h3>
+                <div class="notes" id="mid-goals">
+                    <div class="goal-list">
+                        <p>placeholder</p>
+                    </div>
+                    <button class="addBtn" onclick="overlayOpen('overlay-mid')">+ add goal</button>
+                </div>
+            </div>
+            <div class="long-term">
+                <h3>Long term Goals:</h3>
+                <div class="notes" id="long-goals">
+                    <div class="goal-list">
+                        <p>placeholder</p>
+                    </div>
+                    <button class="addBtn" onclick="overlayOpen('overlay-long')">+ add goal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay-short" class="overlay" onclick="overlayClose('overlay-short')">
+        <div id="inside-overlay" onclick="event.stopPropagation()">
+            <div id="short-contents">
+                <h1>New short term goal</h1>
+                    <input type="text" class="goal-title" placeholder="Goal title">
+                    <textarea class="goal-description" placeholder="Description"></textarea> 
+                    <div class="date-group">
+                        <p>Estimated completion date:</p>
+                        <input type="date" class="goal-length" name="Target completion date">
+                    </div>
+                <div class="radio-group">
+                    <h3>Choose a category: </h3>
+                    <label>
+                        <input type="radio" name="short-category" value="personal" checked>
+                        Personal
+                    </label>
+                    <label>
+                        <input type="radio" name="short-category" value="education">
+                        Education
+                    </label>
+                    <label>
+                        <input type="radio" name="short-category" value="work">
+                        Work
+                    </label>
+                    <label>
+                        <input type="radio" name="short-category" value="fitness">
+                        Fitness
+                    </label>
+                    <label>
+                        <input type="radio" name="short-category" value="other">
+                        <span>Other:</span>
+                        <input type="text" class="other-field" placeholder="Category">
+                        <div class="color-picker-wrapper">
+                            <input type="color" class="color-picker">
+                        </div>
+                    </label>
+                    <h3>Check in frequency:</h3>
+                    <label>
+                        <input type="radio" name="short-freq" value="recommended" checked>
+                        Recommended
+                    </label>
+                    <label>
+                        <input type="radio" name="short-freq" value="custom">
+                        Custom:
+                        <select id="short-freq-dropdown">
+                            <option value="1">Every day</option>
+                            <option value="2">Every 2 days</option>
+                            <option value="3">Every 3 days</option>
+                            <option value="4">Every 4 days</option>
+                            <option value="5">Every 5 days</option>
+                            <option value="6">Every 6 days</option>
+                            <option value="7">Every week</option>
+                        </select>
+                    </label>
+                    <div class="milestone-section">
+                        <h3>Milestones/Steps</h3>
+                        <label>
+                            <input type="radio" name="short-milestones" value="recommended" checked>
+                            Use Slice of a pie generated milestones
+                        </label>
+                        <label>
+                            <input type="radio" name="short-milestones" value="custom">
+                            Create your own milestones/steps
+                        </label>
+                        <div id="custom-milestones" class="custom-milestones">
+                            <div class="milestone-date-options">
+                                <label>
+                                    <input type="radio" name="milestone-dates" value="evenly-spaced" checked>
+                                    Evenly spaced milestones
+                                </label>
+                                <label>
+                                    <input type="radio" name="milestone-dates" value="custom-dates">
+                                    Choose your own dates
+                                </label>
+                            </div>
+
+                            <div id="milestone-list">
+                                <div class="milestone-row" draggable="true">
+                                    <span class="drag-handle">☰</span>
+                                    <input type="text" class="milestone-input" placeholder="Milestone">
+                                    <input type="date" class="milestone-date">
+                                    <button class="delete-milestone">x</button>
+                                </div>
+                            </div>
+                            <button type="button" id="add-milestone">
+                                + add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-goal">Add Goal</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="goal-details-overlay" class="overlay" onclick="closeGoalDetails()">
+        <div id="goal-details" onclick="event.stopPropagation()">
+            <h1 id="details-title"></h1>
+            <p id="details-description"></p>
+            <p>
+                <strong>Completion date:</strong>
+                <span id="details-date"></span>
+            </p>
+            <h3>Milestones:</h3>
+            <div id="details-milestones"></div>
+            <button id="save-details">Save</button>
+        </div>
+    </div>
+
+    <div id="overlay-mid" class="overlay" onclick="overlayClose('overlay-mid')">
+        <div id="inside-overlay" onclick="event.stopPropagation()">
+            <div id="text">
+                <h1>Add a new mid goal:</h1>
+                <a href="#">
+                    <div class="btn">Add</div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="overlay-long" class="overlay" onclick="overlayClose('overlay-long')">
+        <div id="inside-overlay" onclick="event.stopPropagation()">
+            <div id="text">
+                <h1>Add a new long goal:</h1>
+                <a href="#">
+                    <div class="btn">Add</div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
