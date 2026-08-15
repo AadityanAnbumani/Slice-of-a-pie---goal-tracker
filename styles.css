@@ -320,3 +320,49 @@ label {
     width: 80px;
     opacity: 0.12;
 }
+
+/* Sidebar styling */
+
+#sidebar {
+    position: fixed;
+    left: 20px;
+    top: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 40;
+}
+
+#daily-checkin-btn, #journal-btn {
+    width: 150px;
+    min-height: 45px;
+    border: 1px solid rgba(136, 169, 111, 0.15);
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 8px 12px;
+    font-family: "Nunito", sans-serif;
+    font-size: 13px;
+}
+
+#daily-checkin-btn:hover, #journal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+#daily-checkin-btn span:first-child, #journal-btn span:first-child {
+    width: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+#checkin-status-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+}

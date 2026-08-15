@@ -131,6 +131,13 @@ addGoalButton.addEventListener("click", function () {
 
     const frequency = document.querySelector('input[name="short-freq"]:checked').value;
 
+    let checkInInterval;
+    if (frequency === "custom") {
+        checkInInterval = Number(document.getElementById("short-freq-dropdowwn").value);
+    } else {
+        checkInInterval = 1;
+    }
+
     const milestoneType = document.querySelector('input[name="short-milestones"]:checked').value;
 
     let milestones = [];
@@ -162,7 +169,10 @@ addGoalButton.addEventListener("click", function () {
         completionDate: completionDate,
         category: category,
         frequency: frequency,
-        milestones: milestones
+        milestones: milestones,
+        lastCheckIn: null,
+        checkInInterval: checkInInterval,
+        nextCheckIn: null
     };
 
     goals.push(goal);
@@ -170,6 +180,10 @@ addGoalButton.addEventListener("click", function () {
     displayGoal(goal);
 
     console.log(goals);
+
+    console.log(goal);
+    console.log("Check-in due:", isCheckInDue(goal));
+    console.log("Next check-in:", getNextCheckIn(goal));
 
 })
 
@@ -368,4 +382,30 @@ function getDaysRemaining(goal) {
         return "1 day";
     }
     return `${daysRemaining} days`;
+}
+
+function getNextCheckIn(goal) {
+    if (!goal.lastCheckIn) {
+        return null;
+    }
+    const lastCheckIn = new Date(goal.lastCheckIn);
+    lastCheckIn.setDate(lastCheckIn.getDate() + goal.checkInInterval);
+
+    return lastCheckIn;
+}
+
+function isCheckInDue(goal) {
+    if (!goal.lastCheckIn) {
+        return true;
+    }
+    const nextCheckIn = getNextCheckIn(goal);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    nextCheckIn.setHours(0, 0, 0, 0);
+
+    return today >= nextCheckIn;
+}
+
+function openDailyCheckIn() {
+    console.log("Opening daily check in...")
 }
